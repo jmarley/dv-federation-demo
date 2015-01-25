@@ -5,8 +5,8 @@
 == Option 2 - Generate docker install
 The following steps can be used to configure and run the demo in docker container
 
-. [Download and unzip]
-. Download products
+. [Download ond unzip]
+. http://www.jboss.org/products/datavirt/download/[Download JBoss Data Virtualization]
 . Add products to installs directory
 . Copy Dockerfile and .dockerignore files in support/docker directory to the project root
 . Build demo image
