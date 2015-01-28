@@ -22,10 +22,7 @@ RUN sed -i "s:<installpath>.*</installpath>:<installpath>$DV_HOME</installpath>:
   && rm -rf /opt/jboss/installation-dv
 
 # Copy demo, support files and helper script
-# TODO reorgainize teiid file placement/which means updating cli script
 COPY support/teiidfiles/  $DV_HOME/jboss-eap-6.1/teiidfiles/
-
-#COPY support/docker/start.sh /opt/jboss/
 
 # Swtich back to root user to perform build and cleanup
 USER root
@@ -39,15 +36,11 @@ USER jboss
 
 # Deploy appropriate VDB
 RUN  mv $DV_HOME/jboss-eap-6.1/teiidfiles/vdb/ $DV_HOME/jboss-eap-6.1/standalone/deployments/ \ 
-  && mv $DV_HOME/jboss-eap-6.1/teiidfiles/teiid-security-roles.properties $DV_HOME/jboss-eap-6.1/standalone/configuration/ \
+  && mv $DV_HOME/jboss-eap-6.1/teiidfiles/teiid-security-* $DV_HOME/jboss-eap-6.1/standalone/configuration/ \
   && mv $DV_HOME/jboss-eap-6.1/teiidfiles/standalone.dv.xml $DV_HOME/jboss-eap-6.1/standalone/configuration/standalone.xml
 
 # Expose Ports
-EXPOSE 9990 9999 8080 31000 10090 10099 8180
+EXPOSE 9990 9999 8080 31000
 
 # Default Command
-#CMD ["/opt/jboss/dv/jboss-eap-6.1/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0" ]
-CMD ["/bin/bash"]
-
-# Helper script
-#ENTRYPOINT ["/opt/jboss/start.sh"]
+CMD ["/opt/jboss/dv/jboss-eap-6.1/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0" ]
