@@ -6,7 +6,7 @@
 </com.izforge.izpack.panels.TargetPanel>
 <com.izforge.izpack.panels.UserInputPanel id="security">
 <userInput>
-<entry key="adminPassword" value="2851c15b7f819875fdb05f0bd8666564"/>
+<entry key="adminPassword" value="5126d749be51ea7fab4e7434d28cd222"/>
 <entry key="adminUser" value="admin"/>
 </userInput>
 </com.izforge.izpack.panels.UserInputPanel>
