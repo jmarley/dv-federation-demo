@@ -25,13 +25,6 @@ RUN sed -i "s:<installpath>.*</installpath>:<installpath>$DV_HOME</installpath>:
 # TODO reorgainize teiid file placement/which means updating cli script
 COPY support/teiidfiles/  $DV_HOME/jboss-eap-6.1/teiidfiles/
 
-# Configure h2 datasource
-#RUN $DV_HOME/jboss-eap-6.1/bin/standalone.sh -c standalone.xml -b 0.0.0.0 -bmanagement 0.0.0.0 && \#> /dev/null 2>&1 #\ 
-#$DV_HOME/jboss-eap-6.1/bin/jboss-cli.sh --connect --file=$DV_HOME/jboss-eap-6.1/teiidfiles/scripts/setup.cli
-#VOLUME ["/community"]
-# Deploy appropriate VDB
-#RUN  mv $DV_HOME/teiidfiles/vdb/portfolio-vdb.* $DV_HOME/jboss-eap-6.1/standalone/deployments/vdb/
-COPY support/teiidfiles/teiid-security-roles.properties support/teiidfiles/teiid-security-users.properties support/teiidfiles/standalone.dv.xml $DV_HOME/jboss-eap-6.1/standalone/configuration/
 #COPY support/docker/start.sh /opt/jboss/
 
 # Swtich back to root user to perform build and cleanup
@@ -43,6 +36,11 @@ RUN chown -R jboss:jboss $DV_HOME/jboss-eap-6.1/teiidfiles/ #\
 
 # Run as JBoss
 USER jboss
+
+# Deploy appropriate VDB
+RUN  mv $DV_HOME/jboss-eap-6.1/teiidfiles/vdb/ $DV_HOME/jboss-eap-6.1/standalone/deployments/ \ 
+  && mv $DV_HOME/jboss-eap-6.1/teiidfiles/teiid-security-roles.properties $DV_HOME/jboss-eap-6.1/standalone/configuration/ \
+  && mv $DV_HOME/jboss-eap-6.1/teiidfiles/standalone.dv.xml $DV_HOME/jboss-eap-6.1/standalone/configuration/standalone.xml
 
 # Expose Ports
 EXPOSE 9990 9999 8080 31000 10090 10099 8180
