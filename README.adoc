@@ -1,16 +1,31 @@
 = JBoss DV Multiple Data Source Federation Demo
+:source-highlighter: pygments
+:icons: font
 
 == Option 1 - Install on your machine
 
 == Option 2 - Generate docker install
 The following steps can be used to configure and run the demo in docker container
 
-. [Download ond unzip]
+. Download project
 . http://www.jboss.org/products/datavirt/download/[Download JBoss Data Virtualization]
 . Add products to installs directory
 . Copy Dockerfile and .dockerignore files in support/docker directory to the project root
 . Build demo image
+
+[source,bash]
+----
+$ sudo docker build -t jmarley/dv-federation-demo .
+----
+
+[start=6]
 . Start demo container
+[source,bash]
+----
+$ sudo docker run -d -p 31000:31000 -p 8080:8080 -p 9990:9990 -p 9999:9999 -t jmarley/dv-federation-demo
+----
+
+Additional information can be found in the jbossdemocentral docker https://github.com/jbossdemocentral/docker-developer[developer repository]
 
 == Use Case 1
 
