@@ -2,6 +2,10 @@
 :source-highlighter: pygments
 :icons: font
 
+This is a demo project to get you started with automatically installing JBoss Data Virtualization and configures a virtual database that has two data sources: h2 and text file.
+
+TODO add additional data sources 
+
 == Option 1 - Install on your machine
 
 == Option 2 - Generate docker install
