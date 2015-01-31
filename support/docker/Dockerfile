@@ -43,4 +43,4 @@ RUN  mv $DV_HOME/jboss-eap-6.1/teiidfiles/vdb/ $DV_HOME/jboss-eap-6.1/standalone
 EXPOSE 9990 9999 8080 31000
 
 # Default Command
-CMD ["/opt/jboss/dv/jboss-eap-6.1/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0" ]
+CMD ["/opt/jboss/dv/jboss-eap-6.1/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0", "-bjboss.home.dir", "/opt/jboss/dv/jboss-eap-6.1" ]
