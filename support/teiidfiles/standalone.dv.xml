@@ -312,7 +312,7 @@
                     <connection-definitions>
                         <connection-definition class-name="org.teiid.resource.adapter.file.FileManagedConnectionFactory" jndi-name="java:/marketdata-file" enabled="true" use-java-context="true" pool-name="fileDS">
                             <config-property name="ParentDirectory">
-                                $/teiidfiles/data/
+                                ${jboss.home.dir}/teiidfiles/data/
                             </config-property>
                             <config-property name="AllowParentPaths">
                                 true
