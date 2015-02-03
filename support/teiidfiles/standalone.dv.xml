@@ -94,31 +94,12 @@
 
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:1.4">
-            <async-handler name="COMMAND_LOG">
-                <level name="DEBUG"/>
-                <queue-length value="50"/>
-                <overflow-action value="block"/>
-                <subhandlers>
-                    <handler name="TEIID_JPA_LOG"/>
-                </subhandlers>
-            </async-handler>
-            <async-handler name="AUDIT_LOG">
-                <level name="DEBUG"/>
-                <queue-length value="50"/>
-                <overflow-action value="block"/>
-                <subhandlers>
-                    <handler name="TEIID_JPA_LOG"/>
-                </subhandlers>
-            </async-handler>
             <console-handler name="CONSOLE">
                 <level name="INFO"/>
                 <formatter>
                     <named-formatter name="COLOR-PATTERN"/>
                 </formatter>
             </console-handler>
-            <custom-handler name="TEIID_JPA_LOG" class="org.teiid.logger.DatabaseAppender" module="org.jboss.teiid.extensions">
-                <level name="DEBUG"/>
-            </custom-handler>
             <periodic-rotating-file-handler name="FILE" autoflush="true">
                 <formatter>
                     <named-formatter name="PATTERN"/>
@@ -144,18 +125,6 @@
             </logger>
             <logger category="jacorb.config">
                 <level name="ERROR"/>
-            </logger>
-            <logger category="org.teiid.COMMAND_LOG">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="COMMAND_LOG"/>
-                </handlers>
-            </logger>
-            <logger category="org.teiid.AUDIT_LOG">
-                <level name="DEBUG"/>
-                <handlers>
-                    <handler name="AUDIT_LOG"/>
-                </handlers>
             </logger>
             <root-logger>
                 <level name="INFO"/>
@@ -198,14 +167,6 @@
                     <security>
                         <user-name>modeshapeUser</user-name>
                         <password>${VAULT::modeshape::modeshape.password::1}</password>
-                    </security>
-                </datasource>
-                <datasource jndi-name="java:/teiid-log-ds" pool-name="teiid-log-ds" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:file:${jboss.server.data.dir}/teiid-logging/teiid-logging-ds;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>${VAULT::teiid::dblogging.password::1}</password>
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/accounts-ds" pool-name="h2" enabled="true" use-java-context="true">
