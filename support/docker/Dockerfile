@@ -32,15 +32,14 @@ COPY support/vault.keystore ${DV_JBOSS_HOME}/vault.keystore
 USER root
 
 # Adjust permissions and cleanup
-RUN chown -R jboss:jboss ${DV_JBOSS_HOME}/teiidfiles/ #\
-#&& chmod +x /opt/jboss/start.sh
+RUN chown -R jboss:jboss ${DV_JBOSS_HOME}/teiidfiles/ 
 
 # Run as JBoss
 USER jboss
 
 # Deploy appropriate VDB
 RUN  mv ${DV_JBOSS_HOME}/teiidfiles/vdb/ ${DV_JBOSS_HOME}/standalone/deployments/ \ 
-  && mv ${DV_JBOSS_HOME}/teiidfiles/teiid-security-* ${DV_JBOSS_HOME}/standalone/configuration/ \
+#  && mv ${DV_JBOSS_HOME}/teiidfiles/teiid-security-* ${DV_JBOSS_HOME}/standalone/configuration/ \
   && mv ${DV_JBOSS_HOME}/teiidfiles/standalone.dv.xml ${DV_JBOSS_HOME}/standalone/configuration/standalone.xml
 
 # Expose Ports
@@ -48,4 +47,4 @@ EXPOSE 9990 9999 8080 31000
 
 # Default Command
 CMD ["/bin/bash"]
-CMD ["/opt/jboss/dv/jboss-eap-6.3/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0", "-bjboss.home.dir", "/opt/jboss/dv/jboss-eap-6.3" ]
+CMD ["/opt/jboss/dv/jboss-eap-6.3/bin/standalone.sh" ,"-c" ,"standalone.xml" ,"-b" ,"0.0.0.0" ,"-bmanagement","0.0.0.0", "-bjboss.home.dir", "/opt/jboss/dv/jboss-eap-6.3/" ]
